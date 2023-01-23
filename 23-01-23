@@ -1,0 +1,47 @@
+longest substring without repeating characters
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        String res = "";
+        int count=0;
+        for(int i=0;i<s.length();i++){
+            if(!res.contains(s.substring(i,i+1))){
+                res+=s.substring(i,i+1);
+            }
+            else{
+                int index = res.indexOf(s.substring(i,i+1));
+                String str = res.substring(index+1,res.length());
+                res="";
+                res=str+s.substring(i,i+1);
+            }
+            int max= res.length();
+            if(max>count){
+                count=max;
+            }
+        }
+        return count;
+    }
+}
+
+first unique characters in a string
+class Solution {
+    public int firstUniqChar(String s) {
+        HashMap<String,Integer> Map = new HashMap<>();
+        int res = -1;
+        for(int i=0;i<s.length();i++){
+            String str =s.substring(i,i+1);
+            if(!Map.containsKey(str)){
+                Map.put(str,1);
+            }
+            else{
+                Map.put(str,Map.get(str)+1);
+            }
+        }
+        for(int j=0;j<s.length();j++){
+            if(Map.get(s.substring(j,j+1))==1){
+                res=j;
+                break;
+            }
+        }
+        return res;
+    }
+}
