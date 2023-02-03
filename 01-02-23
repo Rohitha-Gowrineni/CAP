@@ -1,0 +1,33 @@
+Minimum Absolute Difference in BST
+
+class Solution {
+    int prev=Integer.MAX_VALUE;
+    int res=Integer.MAX_VALUE;
+    public int getMinimumDifference(TreeNode root) {
+        in(root);
+        return res;
+    }
+    public void in(TreeNode root){
+        if(root==null)
+           return;
+        in(root.left);
+        res=Math.min(res,Math.abs(root.val-prev));
+        prev=root.val;
+        in(root.right);
+    }
+}
+
+Same Tree
+
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p==null && q==null)
+          return true;
+        if(p==null || q==null)
+          return false;
+        if(p.val!=q.val)
+          return false;
+    return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
+    }
+}
+
