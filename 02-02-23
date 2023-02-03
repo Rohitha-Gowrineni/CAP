@@ -1,0 +1,55 @@
+Symmetric Tree
+
+class Solution {
+    public boolean isValid(TreeNode p,TreeNode q){
+        if(p==null && q==null)
+          return true;
+        if(p==null || q==null)
+          return false;
+        if(p.val!=q.val)
+          return false;
+    return isValid(p.left,q.right) && isValid(p.right,q.left);
+    }
+    public boolean isSymmetric(TreeNode root) {
+      return isValid(root.left,root.right);  
+    }
+}
+
+Validate Binary Search Tree
+
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return bst(root,Long.MIN_VALUE,Long.MAX_VALUE);
+    }
+    private boolean bst(TreeNode n1,long left,long right){
+        if(n1==null)
+          return true;
+        if(!(n1.val<right && n1.val>left))
+          return false;
+        return(bst(n1.left,left,n1.val)&&bst(n1.right,n1.val,right));
+    }
+}
+
+Height of a Binary Tree
+
+class Solution{
+   public static int height(Node root){
+      if(root==null)
+        return -1;
+      return Math.max(height(root.left),height(root.right))+1;
+   }
+}
+
+Maximum Depth of N-array tree
+
+class Solution {
+    public int maxDepth(Node root) {
+        if(root==null)
+          return 0;
+        int res=0;
+        for(Node c:root.children){
+           res=Math.max(res,maxDepth(c));
+        }
+        return 1+res;
+    }
+}
