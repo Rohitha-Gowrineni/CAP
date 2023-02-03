@@ -1,0 +1,58 @@
+Invert Binary Tree
+
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+      Queue<TreeNode> q =new LinkedList<>();
+      if(root==null)
+         return root;
+      q.add(root);
+      while(!q.isEmpty()){
+          TreeNode temp=q.poll();
+          TreeNode temp1=temp.left;
+          temp.left=temp.right;
+          temp.right=temp1;
+          if(temp.left!=null)
+             q.add(temp.left);
+          if(temp.right!=null)
+             q.add(temp.right);
+      } 
+      return root; 
+    }
+}
+
+Merge Two Binary Trees
+
+class Solution {
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+        if(root1==null && root2==null)
+           return null;
+        if(root1!=null && root2==null)
+           return root1;
+        if(root1==null && root2!=null)
+           return root2;
+        if(root1!=null && root2!=null){
+           root1.val+=root2.val;
+           root1.left=mergeTrees(root1.left,root2.left);
+           root1.right=mergeTrees(root1.right,root2.right);
+        }
+        return root1;
+    }
+}
+
+N-array Tree Preorder Traversal
+
+class Solution {
+    List<Integer> l1 = new ArrayList<>();
+    public List<Integer> preorder(Node root) {
+        pre(root);
+        return l1;
+    }
+    public void pre(Node root){
+        if(root==null)
+           return;
+        l1.add(root.val);
+        for(Node child:root.children){
+            pre(child);
+        }
+    }
+}
